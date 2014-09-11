@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset = "utf-8">
+<title>Ejemplo Jquery UPC</title>
+<style>
+	div{
+		background-color: red;
+		position: absolute;
+		left: 40px;
+		width: 100px;
+		heigh: 100px;
+		margin: 8px;
+	}
+</style>
+<script src="jquery-2.1.1.js">
+
+</script>
+</head>
+<body>
+<button id="go">Activa</button>
+<div id="content">Prueba!</div>
+
+
+<script>
+	$("#go").click(function(){
+		$("#content").animate({
+			width: "80%",
+			opacity: 0.4,
+			marginLeft: "0.6in",
+			fontSize: "4em",
+			borderWidth: "10px",
+			}, 1500);	
+	})
+	
+
+
+</script>
+</body>
+</html>
