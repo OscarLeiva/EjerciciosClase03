@@ -1,0 +1,87 @@
+rails new scaffold author name:string
+
+dentro de la carpeta scaffold:
+rails g scaffold author name:string
+
+rails g scaffold book title:string author:references
+
+
+rake db: migrate  --> para migrar la base de datos
+
+rails s -->para cargar la pagina en el explorador
+
+(has_many: books) en la clase author
+
+para una lista de opciones:
+<%= f.collection_select :author_id, Author.all, :id, :name, :prompt => true %>
+
+
+para crear una nueva clase
+--------------------------------------
+rails g resource user_book
+rails g scaffold user name:string
+
+
+enlazando a las clase con user_book
+-------------------------------------
+
+en la clase user_book:
+
+belongs_to :user
+belongs_to :book
+
+en el caso de user:
+
+has_many :user_books
+has_many :books, :through => :user_books
+
+en el caso de book:
+has_many :user_books
+has_many :users, :through => :user_books
+
+
+enlazando en base de datods:
+rails g migration add_book_id_to_user_books book_id:integer
+rails g migration add_book_id_to_user_books user_id:integer
+
+luego:
+rake db:migrate
+
+Luego, en las vistas de user vamos a crear una vista nueva llamada "add_book.html.erb"
+
+en el controlador: user_controller agregar lo siguiente:
+creamos la controladora
+-----------------------
+def add_book
+	@user= User.find(params[:id])
+end
+
+damos la ruta:
+en la carpeta config, en el archivo routes.rb:
+resources : users do
+ member do
+   get "add_book"
+ end
+end
+
+
+instalando una gema para formularios:
+en rubygems buscar:
+simple_form
+
+ejecutar:
+gem install simple_form
+
+adiconar al archivo gemfile lo siguiente:
+gem 'simple_form'
+lUego en el promt colocar:
+rails g simple_form:install
+
+
+*****
+<% @user.books.each do book %>
+
+
+gema para trabajar con google maps
+-----------------------------------
+gmaps.js
